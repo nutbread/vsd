@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="description" content="Virtual SD card tools" />
+	<meta name="keywords" content="virtual,sd card,sd,card,disk,drive,mount,unmount,manage,windows,7,dolphin" />
+	<meta name="author" content="nutbread" />
+	<title>Virtual SD Card Tools</title>
+	<link rel="shortcut icon" href="favicon.png" />
+	<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+
+<div class="header_bar">
+	<div class="main main_no_overflow header">
+
+		<table class="header_table"><tbody>
+			<tr>
+				<td class="header_table_cell">
+					<div class="header_table_name">
+						<a class="header_table_name_user link_external link_author light_underline" href="https://github.com/nutbread" target="_blank"><span>nutbread</span></a><span class="header_table_name_separator">/</span><a href="" class="header_table_name_title link_external link_title light_underline"><span>vsd</span></a>
+					</div>
+				</td>
+				<td class="header_table_cell">
+					<div class="header_table_separator"></div>
+				</td>
+				<td class="header_table_cell header_table_cell_full">
+					<div class="header_table_description">
+						<div class="header_table_description_name">Virtual SD card tools</div>
+						<div class="header_table_description_body">Easily create and manage virtual disks on Windows</div>
+					</div>
+				</td>
+				<td class="header_table_cell">
+					<a class="header_table_view_on_github link_external link_view_on_github light_nohover_color_hover" href="https://github.com/nutbread/vsd" target="_blank">
+						<div class="header_table_view_on_github_line1">view on</div>
+						<div class="header_table_view_on_github_line2">github</div>
+					</a>
+				</td>
+			</tr>
+		</tbody></table>
+
+	</div>
+</div>
+<div class="main body">
+
+	<h1 id="about"><span class="hardlink_text">About<a class="hardlink" href="#about">#</a></span></h1>
+	<p>
+		The <em>vsd</em> package provides two python scripts which are helpful in automating virtual disk creation, deletion, mounting, and unmounting.
+	</p>
+	<p>
+		Additionally, it comes with several <code>.bat</code> files which can be double-clicked or executed from the command line to perform the different available commands.
+	</p>
+
+	<h4 id="required.software"><span class="hardlink_text">Required software<a class="hardlink" href="#required.software">#</a></span></h4>
+	<p>
+		<ul>
+			<li><a class="link_external light_underline" href="https://www.python.org/downloads/" target="_blank"><span>python</span></a> &ndash; versions 2.x or 3.x should both work</li>
+			<li>Windows Vista or above &ndash; for an up-to-date <a class="link_external light_underline" href="https://support.microsoft.com/kb/300415" target="_blank"><span>DiskPart</span></a> application</li>
+		</ul>
+	</p>
+
+	<h4 id="download"><span class="hardlink_text">Download<a class="hardlink" href="#download">#</a></span></h4>
+	<p>
+		<ul>
+			<li><a class="link_codebase_raw light_underline" href="https://raw.githubusercontent.com/nutbread/vsd/master/builds/build_package.zip" target="_blank"><span>Download</span></a> &ndash; zip file containing all relevant <code>.bat</code> and <code>.py</code> files</li>
+		</ul>
+	</p>
+
+	<h4 id="example"><span class="hardlink_text">Example Usage<a class="hardlink" href="#example">#</a></span></h4>
+	<p>
+		An example of how these scripts can be used is to create a virtual SD card file (<code>sd.raw</code>) for use with <a class="link_external light_underline" href="https://dolphin-emu.org/" target="_blank"><span>Dolphin Emulator</span></a>, <em>without</em> having to download unnecessary shareware.<span class="light"> (see: WinImage)</span>
+	</p>
+	<p>
+		To use, simply get all the required software, download and unzip the build package into a folder, and then edit the following variables in <code>settings.bat</code>:
+	</p>
+	<p>
+		<ul>
+			<li>
+				<strong>SD_CARD_PATH</strong><br />
+				It will usually look something similar to <code>C:\Users\PROFILE\Documents\Dolphin Emulator\Wii\sd.raw</code>
+			</li>
+			<li>
+				<strong>SD_CARD_MOUNT_DRIVE_LETTER</strong><br />
+				The drive letter the file should be mounted to when editing
+			</li>
+			<li>
+				<strong>SD_CARD_SIZE</strong><br />
+				The size (in MiB) of the virtual SD card file
+			</li>
+			<li>
+				<strong>SD_CARD_LABEL</strong><br />
+				The desired label as it appears under &ldquo;Computer&rdquo; and other places
+			</li>
+		</ul>
+	</p>
+	<p>
+		To edit SD card contents, run <code>create.bat</code> followed by <code>mount.bat</code> (for subsequent editing, only <code>mount.bat</code> needs to be executed.)
+		Then place any files on the newly added disk under &ldquo;Computer&rdquo;.
+		After editing is complete, run <code>unmount.bat</code> to allow other applications read/write access on the virtual SD card file.
+	</p>
+	<p>
+		Finally, to enable in Dolphin, make sure that &ldquo;Insert SD Card&rdquo; is enabled under &ldquo;Options&rdquo; -&gt; &ldquo;Configure&rdquo; -&gt; &ldquo;Wii&rdquo; -&gt; &ldquo;Device Settings&rdquo;<br />
+	</p>
+	<p>
+		<span class="light">
+			Note that the same general setup can be used for other applications with a little tweaking; it's designed to be fairly generic.
+		</span>
+	</p>
+
+
+	<div class="sep sep_large"></div>
+	<h1 id="batch"><span class="hardlink_text">Batch Files<a class="hardlink" href="#batch">#</a></span></h1>
+	<p>
+		<ul>
+			<li>
+				<code><strong><a class="link_codebase light_underline" href="https://github.com/nutbread/vsd/blob/master/src/settings.bat" target="_blank"><span>settings.bat</span></a></strong></code> &ndash; Contains various settings which are used in all of the other <code>.bat</code> scripts. The section at the top should be edited as desired.
+			</li>
+			<li>
+				<code><strong><a class="link_codebase light_underline" href="https://github.com/nutbread/vsd/blob/master/src/create.bat" target="_blank"><span>create.bat</span></a></strong></code> &ndash; Creates a new virtual disk file and formats it. If the target path already exists, the user is prompted if it should re-create the file. Additionally, a shortcut to the parent directory of the new file is created.
+			</li>
+			<li>
+				<code><strong><a class="link_codebase light_underline" href="https://github.com/nutbread/vsd/blob/master/src/delete.bat" target="_blank"><span>delete.bat</span></a></strong></code> &ndash; Deletes the virtual hard disk file, along with the shortcut to its parent directory. If the file is currently mounted, it must be unmounted before deletion will work.
+			</li>
+			<li>
+				<code><strong><a class="link_codebase light_underline" href="https://github.com/nutbread/vsd/blob/master/src/mount.bat" target="_blank"><span>mount.bat</span></a></strong></code> &ndash; Attempts to mount the virtual disk file to a volume and apply a new letter to it. Additionally creates a shortcut to the new drive letter for ease of access.
+			</li>
+			<li>
+				<code><strong><a class="link_codebase light_underline" href="https://github.com/nutbread/vsd/blob/master/src/unmount.bat" target="_blank"><span>unmount.bat</span></a></strong></code> &ndash; Attempts to unmount the virtual disk file. The shortcut to the drive letter will also be deleted on a successful unmounting.
+			</li>
+		</ul>
+	</p>
+
+
+	<div class="sep sep_large"></div>
+	<h1 id="vsd.py"><span class="hardlink_text">vsd.py<a class="hardlink" href="#vsd.py">#</a></span></h1>
+	<p>
+		<code>vsd.py</code> is the main script used for creating, deleting, mounting, and unmounting virtual disk files. It can perform up to 4 of the commands in one execution.
+	</p>
+	<p>
+		Descriptions of the command line flags and commands follow. Additional info can be obtained by executing <code class="block">vsd.py --usage</code>.
+	</p>
+
+	<h4 id="vsd.py.commands"><span class="hardlink_text">Commands<a class="hardlink" href="#vsd.py.commands">#</a></span></h4>
+	<p>
+		If multiple commands are specified, they will be executed in the order: <strong><code>--unmount</code></strong>, <strong><code>--delete</code></strong>, <strong><code>--create</code></strong>, <strong><code>--mount</code></strong>.<br />
+		They are <strong>not</strong> executed in the order they appear on the command line.
+	</p>
+	<p>
+		<ul>
+			<li>
+				<strong><code>--create</code></strong> &ndash; Creates a new virtual disk file<br />
+				If the file already exists, it will <strong>not</strong> be overwritten.<br />
+				<span class="light">Uses: <code>--path</code>; Optional <code>--size</code>, <code>--label</code>, <code>--file-system</code></span>
+			</li>
+			<li>
+				<strong><code>--delete</code></strong> &ndash; Deletes a virtual disk file<br />
+				If the file is mounted, it will <strong>not</strong> be deleted.<br />
+				<span class="light">Uses: <code>--path</code></span>
+			</li>
+			<li>
+				<strong><code>--mount</code></strong> &ndash; Mounts a virtual disk file to a volume letter<br />
+				<span class="light">Uses: <code>--path</code>, <code>--letter</code></span>
+			</li>
+			<li>
+				<strong><code>--unmount</code></strong> &ndash; Unmounts a virtual disk file<br />
+				If <code>--letter</code> is specified, the disk will <strong>only</strong> unmount if it is mounted to the specified letter.<br />
+				<span class="light">Uses: <code>--path</code>; Optional: <code>--letter</code></span>
+			</li>
+		</ul>
+	</p>
+
+	<h4 id="vsd.py.flags"><span class="hardlink_text">Flags<a class="hardlink" href="#vsd.py.flags">#</a></span></h4>
+	<p>
+		<ul>
+			<li>
+				<strong><code>--path</code></strong> &ndash; The path to the virtual disk file
+			</li>
+			<li>
+				<strong><code>--size</code></strong> &ndash; The virtual disk size in MiB
+			</li>
+			<li>
+				<strong><code>--label</code></strong> &ndash; The disk label used during formatting
+			</li>
+			<li>
+				<strong><code>--letter</code></strong> &ndash; The drive letter a virtual disk file should be mounted to
+			</li>
+			<li>
+				<strong><code>--file-system</code></strong> &ndash; A file system such as FAT, FAT32, NTFS, etc.<br />
+				If omitted, it will be the default option DiskPart uses (sometimes unformatted)<br />
+				<span class="light">See DiskPart &ldquo;FILESYSTEMS&rdquo; command for more info</span>
+			</li>
+		</ul>
+	</p>
+
+
+	<div class="sep sep_large"></div>
+	<h1 id="shortcut.py"><span class="hardlink_text">shortcut.py<a class="hardlink" href="#shortcut.py">#</a></span></h1>
+	<p>
+		<code>shortcut.py</code> is responsible for creating and deleting shortcut. It is designed to be able to create file shortcuts and URI shortcuts as well. It can be used as an imported library, and as such, some of its functionality is not used by the included batch scripts.
+	</p>
+	<p>
+		Initially, <code>shortcut.py</code> was designed to use the <a class="link_external light_underline" href="http://sourceforge.net/projects/pywin32/" target="_blank"><span>pywin32 extensions</span></a> to help create shortcuts, but it has problems creating directory shortcuts this way. The code remains in the file, but it is never used.
+	</p>
+
+	<h4 id="shortcut.py.command.line"><span class="hardlink_text">Command Line<a class="hardlink" href="#shortcut.py.command.line">#</a></span></h4>
+	<p>
+		The general format of the command line usage is:<br />
+		<code class="block">shortcut.py [input_arguments] output_filename.lnk target.ext [shortcut_arguments]</code>
+	</p>
+	<p>
+		Once filename and target have been specified (either by <code>--flagged</code> or flagless arguments,) all remaining arguments are used as the arguments of the shortcut file.
+	</p>
+	<h4 id="shortcut.py.command.line.flags"><span class="hardlink_text">Command Line Flags<a class="hardlink" href="#shortcut.py.command.line.flags">#</a></span></h4>
+	<p>
+		Additional info can be obtained by executing <code class="block">shortcut.py --usage</code>.
+	</p>
+	<p>
+		<ul>
+			<li>
+				<strong><code>--icon</code></strong> &ndash; A path to an icon file, or a file containing icons
+			</li>
+			<li>
+				<strong><code>--icon-index</code></strong> &ndash; The index of the icon within a file, in case there are multiple icons
+			</li>
+			<li>
+				<strong><code>--working-directory</code></strong> &ndash; The working directory the shortcut should start in
+			</li>
+			<li>
+				<strong><code>--target</code></strong> &ndash; The target file or URI the shortcut should point to
+			</li>
+			<li>
+				<strong><code>--filename</code></strong> &ndash; The output filename of the shortcut.<br />
+				If <code>--target</code> is a local file, the filename will end with <code>.lnk</code>.<br />
+				If <code>--target</code> is any other URI, the filename will end with <code>.url</code>.
+			</li>
+		</ul>
+	</p>
+
+</div>
+
+
+</body>
+</html>
+
