@@ -44,7 +44,7 @@
 </div>
 <div class="main body">
 
-	<h1 id="about"><span class="hardlink_text">About<a class="hardlink" href="#about">#</a></span></h1>
+	<h1 id="about"><span class="hardlink_text">About<a class="hardlink" href="#about"></a></span></h1>
 	<p>
 		The <em>vsd</em> package provides two python scripts which are helpful in automating virtual disk creation, deletion, mounting, and unmounting.
 	</p>
@@ -52,7 +52,7 @@
 		Additionally, it comes with several <code>.bat</code> files which can be double-clicked or executed from the command line to perform the different available commands.
 	</p>
 
-	<h4 id="required.software"><span class="hardlink_text">Required software<a class="hardlink" href="#required.software">#</a></span></h4>
+	<h4 id="required.software"><span class="hardlink_text">Required software<a class="hardlink" href="#required.software"></a></span></h4>
 	<p>
 		<ul>
 			<li><a class="link_external light_underline" href="https://www.python.org/downloads/" target="_blank"><span>python</span></a> &ndash; versions 2.x or 3.x should both work</li>
@@ -60,14 +60,14 @@
 		</ul>
 	</p>
 
-	<h4 id="download"><span class="hardlink_text">Download<a class="hardlink" href="#download">#</a></span></h4>
+	<h4 id="download"><span class="hardlink_text">Download<a class="hardlink" href="#download"></a></span></h4>
 	<p>
 		<ul>
 			<li><a class="link_codebase_raw light_underline" href="https://raw.githubusercontent.com/nutbread/vsd/master/builds/build_package.zip" target="_blank"><span>Download</span></a> &ndash; zip file containing all relevant <code>.bat</code> and <code>.py</code> files</li>
 		</ul>
 	</p>
 
-	<h4 id="example"><span class="hardlink_text">Example Usage<a class="hardlink" href="#example">#</a></span></h4>
+	<h4 id="example"><span class="hardlink_text">Example Usage<a class="hardlink" href="#example"></a></span></h4>
 	<p>
 		An example of how these scripts can be used is to create a virtual SD card file (<code>sd.raw</code>) for use with <a class="link_external light_underline" href="https://dolphin-emu.org/" target="_blank"><span>Dolphin Emulator</span></a>, <em>without</em> having to download unnecessary shareware.<span class="light"> (see: WinImage)</span>
 	</p>
@@ -110,7 +110,7 @@
 
 
 	<div class="sep sep_large"></div>
-	<h1 id="batch"><span class="hardlink_text">Batch Files<a class="hardlink" href="#batch">#</a></span></h1>
+	<h1 id="batch"><span class="hardlink_text">Batch Files<a class="hardlink" href="#batch"></a></span></h1>
 	<p>
 		<ul>
 			<li>
@@ -133,7 +133,7 @@
 
 
 	<div class="sep sep_large"></div>
-	<h1 id="vsd.py"><span class="hardlink_text">vsd.py<a class="hardlink" href="#vsd.py">#</a></span></h1>
+	<h1 id="vsd.py"><span class="hardlink_text">vsd.py<a class="hardlink" href="#vsd.py"></a></span></h1>
 	<p>
 		<code>vsd.py</code> is the main script used for creating, deleting, mounting, and unmounting virtual disk files. It can perform up to 4 of the commands in one execution.
 	</p>
@@ -141,7 +141,7 @@
 		Descriptions of the command line flags and commands follow. Additional info can be obtained by executing <code class="block">vsd.py --usage</code>.
 	</p>
 
-	<h4 id="vsd.py.commands"><span class="hardlink_text">Commands<a class="hardlink" href="#vsd.py.commands">#</a></span></h4>
+	<h4 id="vsd.py.commands"><span class="hardlink_text">Commands<a class="hardlink" href="#vsd.py.commands"></a></span></h4>
 	<p>
 		If multiple commands are specified, they will be executed in the order: <strong><code>--unmount</code></strong>, <strong><code>--delete</code></strong>, <strong><code>--create</code></strong>, <strong><code>--mount</code></strong>.<br />
 		They are <strong>not</strong> executed in the order they appear on the command line.
@@ -170,7 +170,7 @@
 		</ul>
 	</p>
 
-	<h4 id="vsd.py.flags"><span class="hardlink_text">Flags<a class="hardlink" href="#vsd.py.flags">#</a></span></h4>
+	<h4 id="vsd.py.flags"><span class="hardlink_text">Flags<a class="hardlink" href="#vsd.py.flags"></a></span></h4>
 	<p>
 		<ul>
 			<li>
@@ -195,7 +195,7 @@
 
 
 	<div class="sep sep_large"></div>
-	<h1 id="shortcut.py"><span class="hardlink_text">shortcut.py<a class="hardlink" href="#shortcut.py">#</a></span></h1>
+	<h1 id="shortcut.py"><span class="hardlink_text">shortcut.py<a class="hardlink" href="#shortcut.py"></a></span></h1>
 	<p>
 		<code>shortcut.py</code> is responsible for creating and deleting shortcut. It is designed to be able to create file shortcuts and URI shortcuts as well. It can be used as an imported library, and as such, some of its functionality is not used by the included batch scripts.
 	</p>
@@ -203,7 +203,7 @@
 		Initially, <code>shortcut.py</code> was designed to use the <a class="link_external light_underline" href="http://sourceforge.net/projects/pywin32/" target="_blank"><span>pywin32 extensions</span></a> to help create shortcuts, but it has problems creating directory shortcuts this way. The code remains in the file, but it is never used.
 	</p>
 
-	<h4 id="shortcut.py.command.line"><span class="hardlink_text">Command Line<a class="hardlink" href="#shortcut.py.command.line">#</a></span></h4>
+	<h4 id="shortcut.py.command.line"><span class="hardlink_text">Command Line<a class="hardlink" href="#shortcut.py.command.line"></a></span></h4>
 	<p>
 		The general format of the command line usage is:<br />
 		<code class="block">shortcut.py [input_arguments] output_filename.lnk target.ext [shortcut_arguments]</code>
@@ -211,7 +211,7 @@
 	<p>
 		Once filename and target have been specified (either by <code>--flagged</code> or flagless arguments,) all remaining arguments are used as the arguments of the shortcut file.
 	</p>
-	<h4 id="shortcut.py.command.line.flags"><span class="hardlink_text">Command Line Flags<a class="hardlink" href="#shortcut.py.command.line.flags">#</a></span></h4>
+	<h4 id="shortcut.py.command.line.flags"><span class="hardlink_text">Command Line Flags<a class="hardlink" href="#shortcut.py.command.line.flags"></a></span></h4>
 	<p>
 		Additional info can be obtained by executing <code class="block">shortcut.py --usage</code>.
 	</p>
