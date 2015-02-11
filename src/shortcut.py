@@ -5,7 +5,7 @@ try:
 	import win32com.client;
 except ImportError:
 	win32com = None;
-version_info = [ 1 , 0 ];
+version_info = [ 1 , 0 , 1 ];
 
 
 
@@ -292,6 +292,16 @@ def create_shortcut(filename, target, icon=None, wdir=None):
 	else:
 		icon_file = None;
 
+	# Setup filename
+	filename = os.path.abspath(filename);
+	filename_no_unicode = filename.encode("ascii", "ignore").decode("utf-8", "ignore");
+	while (True):
+		p = os.path.split(filename_no_unicode);
+		if (os.path.exists(p[0])): break; # Done
+		filename_no_unicode = os.path.join(os.path.dirname(p[0]), p[1]);
+	filename_no_unicode = os.path.splitext(filename_no_unicode);
+	filename_no_unicode = get_unique_filename(filename_no_unicode[0], filename_no_unicode[1]);
+
 
 	# cscript subprocess or pywin32 version?
 	if (win32com is None):
@@ -300,22 +310,22 @@ def create_shortcut(filename, target, icon=None, wdir=None):
 
 		# Setup cscript source
 		script = [
-			'Set shell = WScript.CreateObject("WScript.Shell")',
-			'Set shortcut = shell.CreateShortcut("{0:s}")'.format(vbscript_escape(filename)),
-			'shortcut.TargetPath = "{0:s}"'.format(vbscript_escape(target_file)),
-			'shortcut.Arguments = "{0:s}"'.format(vbscript_escape(argument_list_to_command_line_string(arguments, False))),
+			u'Set shell = WScript.CreateObject("WScript.Shell")',
+			u'Set shortcut = shell.CreateShortcut("{0:s}")'.format(vbscript_escape(filename_no_unicode)),
+			u'shortcut.TargetPath = "{0:s}"'.format(vbscript_escape(target_file)),
+			u'shortcut.Arguments = "{0:s}"'.format(vbscript_escape(argument_list_to_command_line_string(arguments, False))),
 		];
 
 		if (icon_file is not None):
-			script.append('shortcut.IconLocation = Unescape("{0:s}")'.format(icon_file));
+			script.append(u'shortcut.IconLocation = Unescape("{0:s}")'.format(icon_file));
 		if (wdir):
-			script.append('shortcut.WorkingDirectory = Unescape("{0:s}")'.format(wdir));
+			script.append(u'shortcut.WorkingDirectory = Unescape("{0:s}")'.format(wdir));
 
-		script.append('shortcut.Save');
+		script.append(u'shortcut.Save');
 
 		# Write
 		fn, fd = get_unique_filename(os.path.abspath(sys.argv[0]) + ".vbscript", ".txt", open_mode="wb");
-		fd.write(py_2or3_str_to_bytes("{0:s}\n".format("\n".join(script)), "utf-8"));
+		fd.write(py_2or3_str_to_bytes(u"{0:s}\n".format(u"\n".join(script)), "utf-8"));
 		fd.close();
 
 		# Execute command
@@ -338,6 +348,23 @@ def create_shortcut(filename, target, icon=None, wdir=None):
 			return error;
 		elif (p.returncode != 0):
 			return "CScript.exe returned {0:s}".format(str(p.returncode));
+
+		# Rename
+		if (filename_no_unicode != filename):
+			try:
+				os.remove(filename);
+			except OSError:
+				pass;
+
+			try:
+				os.rename(filename_no_unicode, filename);
+			except OSError:
+				# Error renaming
+				try:
+					os.remove(filename_no_unicode);
+				except OSError:
+					pass;
+				return "Error renaming file";
 
 		# Okay
 		return None;
